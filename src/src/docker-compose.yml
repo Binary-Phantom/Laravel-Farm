@@ -1,0 +1,24 @@
+
+services:
+  app:
+    build: .
+    container_name: laravel-farm
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: fazenda_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: fazenda
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+  
