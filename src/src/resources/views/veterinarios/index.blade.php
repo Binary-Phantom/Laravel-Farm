@@ -21,6 +21,26 @@
         <tr>
             <td>{{ $veterinario->nome }}</td>
             <td>{{ $veterinario->crmv }}</td>
+            <th>Ações</th>
+            <td>
+                <a href="{{ route('veterinarios.edit', $veterinario->id) }}">
+                        <button type="submit">
+                            Editar
+                        </button>
+                </a>
+
+                    <form action="{{ route('veterinarios.destroy', $veterinario->id) }}"
+                        method="POST"
+                        style="display:inline">
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">
+                            Excluir
+                        </button>
+                    </form>
+            </td>
         </tr>
     @endforeach
 </table>

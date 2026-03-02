@@ -11,7 +11,7 @@ class Fazenda extends Model
     protected $fillable = [
         'nome',
         'tamanho_hectares',
-        'responsavel',
+        //'responsavel',
     ];
 
     public function veterinarios(): BelongsToMany
