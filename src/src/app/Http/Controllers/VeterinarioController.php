@@ -11,11 +11,13 @@ class VeterinarioController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $veterinarios = Veterinario::paginate(10);
+{
+    // Pega todos os veterinários paginados (10 por página)
+    $veterinarios = Veterinario::paginate(10);
 
-        return view('veterinarios.index', compact('veterinarios'));
-    }
+    // Passa para a view
+    return view('veterinarios.index', compact('veterinarios'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -61,19 +63,19 @@ class VeterinarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Veterinario $veterinario)
-        {
-            $request->validate([
-            'nome' => 'required|string|max:255',
-            'crmv' => 'required|string|max:20|unique:veterinarios,crmv,' . $veterinario->id
-            ]);
+  public function update(Request $request, Veterinario $veterinario)
+{
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'crmv' => 'required|string|max:20|unique:veterinarios,crmv,' . $veterinario->crmv . ',crmv',
+    ]);
 
-            $veterinario->update($request->all());
+    $veterinario->nome = $request->nome;
+    $veterinario->crmv = $request->crmv; // se quiser permitir alteração de crmv
+    $veterinario->save();
 
-            return redirect()
-            ->route('veterinarios.index')
-            ->with('success', 'Veterinário atualizado!');
-        }
+    return redirect()->route('veterinarios.index')->with('success', 'Veterinário atualizado!');
+}
 
     /**
      * Remove the specified resource from storage.

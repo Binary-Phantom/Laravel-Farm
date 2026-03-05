@@ -13,24 +13,24 @@ class FazendaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $fazendas = Fazenda::paginate(10);
+{
+    $fazendas = Fazenda::with('veterinarios')
+        ->paginate(10);
 
-        return view('fazendas.index', compact('fazendas'));
-    }
+    return view('fazendas.index', compact('fazendas'));
+}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $veterinarios = Veterinario::all();
+{
+    $veterinarios = Veterinario::all();
 
-        return view(
-        'fazendas.create',
+    return view('fazendas.create',
         compact('veterinarios')
-        );
-    }
+    );
+}
 
     /**
      * Store a newly created resource in storage.
@@ -39,24 +39,25 @@ class FazendaController extends Controller
 {
     $request->validate([
         'nome' => 'required|unique:fazendas,nome',
-        'tamanho_hectares' => 'required|numeric|min:1',
-        'veterinarios' => 'required|array|min:1'
+        'tamanho' => 'required|numeric|min:1',
+        'responsavel' => 'required',
+        'veterinarios' => 'required|array|min:1',
     ]);
 
-    // cria fazenda
+    // cria SOMENTE a fazenda
     $fazenda = Fazenda::create([
         'nome' => $request->nome,
-        'tamanho_hectares' => $request->tamanho_hectares,
+        'tamanho' => $request->tamanho,
+        'responsavel' => $request->responsavel,
     ]);
 
-    // associa veterinários
-    $fazenda->veterinarios()->sync(
-        $request->veterinarios
-    );
+    // salva relação N:N
+    $fazenda->veterinarios()
+        ->sync($request->veterinarios);
 
     return redirect()
         ->route('fazendas.index')
-        ->with('success', 'Fazenda criada com veterinário!');
+        ->with('success', 'Fazenda criada!');
 }
 
     /**
@@ -70,15 +71,17 @@ class FazendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Fazenda $fazenda)
-    {
-        $veterinarios = Veterinario::all();
+   public function edit($id)
+{
+    $fazenda = Fazenda::with('veterinarios')->findOrFail($id);
 
-        return view(
-        'fazendas.edit',
-        compact('fazenda', 'veterinarios')
-        );
-    }
+    $veterinarios = Veterinario::all();
+
+    return view('fazendas.edit', compact(
+        'fazenda',
+        'veterinarios'
+    ));
+}
 
     /**
      * Update the specified resource in storage.
@@ -87,32 +90,38 @@ class FazendaController extends Controller
 {
     $request->validate([
         'nome' => 'required|unique:fazendas,nome,' . $fazenda->id,
-        'tamanho_hectares' => 'required|numeric|min:1',
-        'veterinarios' => 'required|array|min:1'
+        'tamanho' => 'required|numeric|min:1',
+        'responsavel' => 'required',
+        'veterinarios' => 'required|array|min:1',
+        'veterinarios.*' => 'exists:veterinarios,crmv',
     ]);
 
+    // ✅ atualiza dados da fazenda
     $fazenda->update([
         'nome' => $request->nome,
-        'tamanho_hectares' => $request->tamanho_hectares,
+        'tamanho' => $request->tamanho,
+        'responsavel' => $request->responsavel,
     ]);
 
-    $fazenda->veterinarios()
-        ->sync($request->veterinarios);
+    // ✅ sincroniza relação many-to-many
+    $fazenda->veterinarios()->sync(
+        $request->veterinarios
+    );
 
     return redirect()
         ->route('fazendas.index')
-        ->with('success','Atualizada!');
+        ->with('success', 'Atualizada!');
 }
 
     /**
      * Remove the specified resource from storage.
      */
    public function destroy(Fazenda $fazenda)
-    {
-        $fazenda->delete();
+{
+    $fazenda->delete();
 
-        return redirect()
+    return redirect()
         ->route('fazendas.index')
         ->with('success','Removida!');
-    }
+}
 }

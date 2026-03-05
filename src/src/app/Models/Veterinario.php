@@ -7,13 +7,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Veterinario extends Model
 {
-    protected $fillable = [
-        'nome',
-        'crmv',
-    ];
+    protected $primaryKey = 'crmv'; // PK é crmv
+    public $incrementing = false;   // não é auto-increment
+    protected $keyType = 'string';  // tipo string
+    protected $fillable = ['crmv', 'nome']; 
 
-    public function fazendas(): BelongsToMany
+    public function getRouteKeyName()
     {
-        return $this->belongsToMany(Fazenda::class);
+        return 'crmv'; // para rotas
+    }
+
+    public function fazendas()
+    {
+        return $this->belongsToMany(
+        Fazenda::class,
+        'fazenda_veterinario',
+        'veterinario_crmv',
+        'fazenda_id',
+        'crmv',
+        'id'
+     );
     }
 }

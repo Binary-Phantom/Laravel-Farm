@@ -13,17 +13,29 @@
     <th>Nome</th>
     <th>Hectares</th>
     <th>Responsável</th>
+    <th>Veterinários</th>
     <th>Ações</th>
 </tr>
 
 @foreach($fazendas as $fazenda)
 <tr>
     <td>{{ $fazenda->nome }}</td>
-    <td>{{ $fazenda->tamanho_hectares }}</td>
-    <td>{{ $fazenda->responsavel }}</td>
+    <td>{{ $fazenda->tamanho}}</td>
+
+    {{-- ✅ responsável --}}
+    <td>
+        {{ $fazenda->responsavel }}
+    </td>
+
+    {{-- ✅ vários veterinários --}}
+    <td>
+        {{ $fazenda->veterinarios->pluck('nome')->join(', ') }}
+    </td>
 
     <td>
-        <a href="{{ route('fazendas.edit',$fazenda->id) }}">Editar</a>
+        <a href="{{ route('fazendas.edit',$fazenda->id) }}">
+            Editar
+        </a>
 
         <form action="{{ route('fazendas.destroy',$fazenda->id) }}"
               method="POST"

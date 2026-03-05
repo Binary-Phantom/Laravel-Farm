@@ -7,16 +7,21 @@
 <br><br>
 
 <label>Tamanho (hectares):</label>
-<input type="number" step="0.01" name="tamanho_hectares" required>
+<input type="number" step="0.01" name="tamanho" required>
 
 <br><br>
 
-<h3>Veterinários</h3>
+<label>Responsável pela Fazenda:</label>
+<input type="text" name="responsavel" required>
+
+<br><br>
+
+<h3>Veterinários Vinculados</h3>
 
 <select name="veterinarios[]" multiple size="5" required>
 @foreach($veterinarios as $vet)
-    <option value="{{ $vet->id }}">
-        {{ $vet->nome }}
+    <option value="{{ $vet->crmv }}">
+        {{ $vet->nome }} - CRMV {{ $vet->crmv }}
     </option>
 @endforeach
 </select>

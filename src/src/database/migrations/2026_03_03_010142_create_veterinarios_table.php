@@ -10,21 +10,18 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('fazendas', function (Blueprint $table) {
-        $table->id();
-        $table->string('nome')->unique();
-        $table->integer('tamanho_hectares');
-        $table->string('responsavel');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('veterinario', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('fazendas');
+        Schema::dropIfExists('veterinario');
     }
 };

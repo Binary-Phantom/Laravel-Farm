@@ -1,47 +1,30 @@
-@if(session('success'))
-    <p style="color:green">
-        {{ session('success') }}
-    </p>
-@endif
+<h1>Lista de Veterinários</h1>
 
-
-<h1>Veterinários</h1>
-
-<a href="{{ route('veterinarios.create') }}">
-    Novo Veterinário
-</a>
+<a href="{{ route('veterinarios.create') }}">Novo Veterinário</a>
 
 <table border="1">
     <tr>
-        <th>Nome</th>
         <th>CRMV</th>
+        <th>Nome</th>
+        <th>Ações</th>
     </tr>
 
     @foreach($veterinarios as $veterinario)
-        <tr>
-            <td>{{ $veterinario->nome }}</td>
-            <td>{{ $veterinario->crmv }}</td>
-            <th>Ações</th>
-            <td>
-                <a href="{{ route('veterinarios.edit', $veterinario->id) }}">
-                        <button type="submit">
-                            Editar
-                        </button>
-                </a>
+    <tr>
+        <td>{{ $veterinario->crmv }}</td>
+        <td>{{ $veterinario->nome }}</td>
+        <td>
+            <a href="{{ route('veterinarios.edit', $veterinario->crmv) }}">
+                <button type="button">Editar</button>
+            </a>
 
-                    <form action="{{ route('veterinarios.destroy', $veterinario->id) }}"
-                        method="POST"
-                        style="display:inline">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit">
-                            Excluir
-                        </button>
-                    </form>
-            </td>
-        </tr>
+            <form action="{{ route('veterinarios.destroy', $veterinario->crmv) }}" method="POST" style="display:inline;">
+    @csrf
+    @method('DELETE') <!-- essencial para que Laravel reconheça como DELETE -->
+    <button type="submit" onclick="return confirm('Deseja realmente excluir?')">Excluir</button>
+    </form>
+        </td>
+    </tr>
     @endforeach
 </table>
 
