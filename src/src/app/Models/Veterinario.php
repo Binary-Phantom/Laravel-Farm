@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Veterinario extends Model
 {
-    protected $primaryKey = 'crmv'; // PK é crmv
-    public $incrementing = false;   // não é auto-increment
-    protected $keyType = 'string';  // tipo string
+    protected $primaryKey = 'crmv'; // PK
+    public $incrementing = false;  
+    protected $keyType = 'string';  
     protected $fillable = ['crmv', 'nome']; 
 
     public function getRouteKeyName()
