@@ -33,7 +33,7 @@
 @forelse($gadosParaAbate as $gado)
 
 <tr>
-    <td>{{ $gado->id }}</td>
+    <td>{{ $gado->codigo }}</td>
 
 ```
 <td>{{ $gado->fazenda->nome }}</td>
