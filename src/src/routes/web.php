@@ -3,9 +3,26 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VeterinarioController;
 use App\Http\Controllers\FazendaController;
+use App\Http\Controllers\GadoController;
+use App\Http\Controllers\RelatorioController;
 
+
+Route::resource('gados', GadoController::class)->except(['show']);
 Route::resource('veterinarios', VeterinarioController::class);
 Route::resource('fazendas', FazendaController::class);
+//Route::resource('gados', GadoController::class);
+Route::get('/relatorios/leite', [RelatorioController::class, 'leitePorFazenda']);
+Route::get('/relatorios/racao', [RelatorioController::class, 'racaoPorFazenda']);
+Route::get('/relatorios/abate', [RelatorioController::class, 'abatePeriodo']);
+Route::get('/relatorios/animais', [RelatorioController::class, 'animaisPorFazenda']);
+Route::get('/relatorios', [RelatorioController::class, 'index'])
+    ->name('relatorios.index');
+
+Route::post('/gados/{id}/abater', [GadoController::class, 'abater'])
+    ->name('gados.abater');
+
+Route::get('/gados/abate', [GadoController::class, 'paraAbate'])
+    ->name('gados.paraAbate');
 
 Route::get('/', function () {
     return view('welcome');

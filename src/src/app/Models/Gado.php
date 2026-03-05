@@ -8,6 +8,10 @@ use Illuminate\Support\Carbon;
 
 class Gado extends Model
 {
+    //protected $primaryKey = 'codigo';
+    //public $incrementing = false;
+   // protected $keyType = 'int';
+
     protected $fillable = [
         'codigo',
         'leite_semana',
@@ -32,4 +36,55 @@ class Gado extends Model
     {
         return is_null($this->abatido_em);
     }
+
+    public function idade()
+{
+    return $this->nascimento->diffInYears(now());
+}
+
+public function racaoPorDia()
+{
+    return $this->racao_semana / 7;
+}
+
+public function pesoEmArrobas()
+{
+    return $this->peso / 15;
+}
+
+public function podeSerAbatido(): bool
+{
+    // mais de 5 anos
+    if ($this->idade() > 5) {
+        return true;
+    }
+
+    // menos de 40 litros de leite
+    if ($this->leite_semana < 40) {
+        return true;
+    }
+
+    // menos de 70 litros e mais de 50kg/dia de ração
+    if ($this->leite_semana < 70 && $this->racaoPorDia() > 50) {
+        return true;
+    }
+
+    // peso maior que 18 arrobas (270kg)
+    if ($this->peso > 270) {
+        return true;
+    }
+
+    return false;
+}
+
+    public function abater()
+    {
+        if (!$this->podeSerAbatido()) {
+        throw new \Exception('Este animal não atende às condições de abate.');
+        }
+
+        $this->abatido_em = now();
+        $this->save();
+    }
+
 }

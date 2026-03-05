@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Gado;
 
 class Fazenda extends Model
 {
     protected $fillable = [
         'nome',
         'tamanho',
-        'responsavel', // apenas texto
+        'responsavel',
     ];
 
     public function veterinarios()
@@ -27,7 +28,7 @@ class Fazenda extends Model
         );
     }
 
-    public function gados()
+    public function gados(): HasMany
     {
         return $this->hasMany(Gado::class);
     }
