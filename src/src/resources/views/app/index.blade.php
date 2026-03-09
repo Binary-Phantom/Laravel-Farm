@@ -18,7 +18,7 @@
 <div class="col-md-4">
 <div class="card text-white bg-warning mb-3">
 <div class="card-body">
-<h5>Ração necessária / Semana</h5>
+<h5>Ração total necessária / Semana</h5>
 <h2>{{ $totalRacao }} Kg</h2>
 </div>
 </div>
@@ -27,7 +27,7 @@
 <div class="col-md-4">
 <div class="card text-white bg-info mb-3">
 <div class="card-body">
-<h5>Animais Jovens Alto Consumo</h5>
+<h5>Animais jovens de alto consumo</h5>
 <h2>{{ $animaisJovensAltoConsumo }}</h2>
 </div>
 </div>

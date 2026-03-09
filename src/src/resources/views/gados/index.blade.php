@@ -11,9 +11,10 @@
 <tr>
     <th>Código</th>
     <th>Fazenda</th>
-    <th>Leite/semana</th>
-    <th>Ração/semana</th>
-    <th>Peso</th>
+    <th>Leite/semana (Litros)</th>
+    <th>Ração/semana (KG)</th>
+    <th>Peso (KG)</th>
+    <th>Peso (@)</th>
     <th>Nascimento</th>
     <th>Status</th>
     <th>Ações</th>
@@ -27,6 +28,8 @@
     <td>{{ $gado->leite_semana }}</td>
     <td>{{ $gado->racao_semana }}</td>
     <td>{{ $gado->peso }}</td>
+    <td>{{ number_format($gado->pesoEmArrobas(), 2) }}</td>
+
     <td>{{ $gado->nascimento }}</td>
 
 ```
