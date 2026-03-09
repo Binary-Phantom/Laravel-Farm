@@ -1,3 +1,6 @@
+@extends('app.app')
+@section('content')
+
 <h1>Novo Veterinário</h1>
 
 <form action="{{ route('veterinarios.store') }}" method="POST">
@@ -13,3 +16,4 @@
 
     <button type="submit">Salvar</button>
 </form>
+@endsection

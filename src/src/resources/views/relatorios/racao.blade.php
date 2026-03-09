@@ -1,14 +1,23 @@
 @extends('app.app')
 @section('content')
 
+<div class="d-flex justify-content-between mb-3">
+<h2>Consumo de Ração por Fazenda</h2>
+</div>
 
-<h1>Consumo de Ração por Fazenda</h1>
+<div class="card">
+<div class="card-body">
 
-<table border="1">
+<table class="table table-striped table-bordered">
+
+<thead class="table-dark">
 <tr>
 <th>Fazenda</th>
 <th>Ração / semana</th>
 </tr>
+</thead>
+
+<tbody>
 
 @foreach($fazendas as $fazenda)
 
@@ -23,6 +32,11 @@
 
 @endforeach
 
+</tbody>
+
 </table>
+
+</div>
+</div>
 
 @endsection

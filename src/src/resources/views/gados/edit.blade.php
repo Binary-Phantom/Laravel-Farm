@@ -1,52 +1,88 @@
-<h1>Editar Gado</h1>
+@extends('app.app')
+
+@section('content')
+
+<h2>Editar Gado</h2>
 
 @if ($errors->any())
 
-<ul style="color:red">
+<div class="alert alert-danger">
+<ul>
+
 @foreach ($errors->all() as $erro)
 <li>{{ $erro }}</li>
 @endforeach
+
 </ul>
+</div>
+
 @endif
 
-<form action="{{ route('gados.update', $gado->id) }}" method="POST">
+<div class="card">
+<div class="card-body">
+
+<form action="{{ route('gados.update',$gado->id) }}" method="POST">
+
 @csrf
 @method('PUT')
 
-<label>Leite por semana</label> <input type="number" step="0.1" name="leite_semana" value="{{ $gado->leite_semana }}" required>
+<div class="mb-3">
+<label class="form-label">Leite por semana</label>
+<input type="number" step="0.1" name="leite_semana"
+value="{{ $gado->leite_semana }}" class="form-control">
+</div>
 
-<br><br>
+<div class="mb-3">
+<label class="form-label">Ração por semana</label>
+<input type="number" name="racao_semana"
+value="{{ $gado->racao_semana }}" class="form-control">
+</div>
 
-<label>Ração por semana</label> <input type="number" name="racao_semana" value="{{ $gado->racao_semana }}" required>
+<div class="mb-3">
+<label class="form-label">Peso</label>
+<input type="number" step="0.1" name="peso"
+value="{{ $gado->peso }}" class="form-control">
+</div>
 
-<br><br>
+<div class="mb-3">
+<label class="form-label">Nascimento</label>
+<input type="date" name="nascimento"
+value="{{ $gado->nascimento->format('Y-m-d') }}"
+class="form-control">
+</div>
 
-<label>Peso</label> <input type="number" step="0.1" name="peso" value="{{ $gado->peso }}" required>
+<div class="mb-3">
 
-<br><br>
+<label class="form-label">Fazenda</label>
 
-<label>Data de nascimento</label> <input type="date" name="nascimento" value="{{ $gado->nascimento->format('Y-m-d') }}" required>
-
-<br><br>
-
-<label>Fazenda</label> <select name="fazenda_id">
+<select name="fazenda_id" class="form-select">
 
 @foreach($fazendas as $fazenda)
 
 <option value="{{ $fazenda->id }}"
 @if($gado->fazenda_id == $fazenda->id) selected @endif>
+
 {{ $fazenda->nome }}
+
 </option>
+
 @endforeach
 
 </select>
 
-<br><br>
+</div>
 
-<button type="submit">Atualizar</button>
+<button class="btn btn-primary">
+Atualizar
+</button>
+
+<a href="{{ route('gados.index') }}" class="btn btn-secondary">
+Voltar
+</a>
 
 </form>
 
-<br>
+</div>
+</div>
 
-<a href="{{ route('gados.index') }}">Voltar</a>
+@endsection

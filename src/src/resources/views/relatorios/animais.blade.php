@@ -1,11 +1,24 @@
-<h1>Animais vivos por fazenda</h1>
+@extends('app.app')
 
-<table border="1">
+@section('content')
 
+<div class="d-flex justify-content-between mb-3">
+<h2>Animais vivos por fazenda</h2>
+</div>
+
+<div class="card">
+<div class="card-body">
+
+<table class="table table-striped table-bordered">
+
+<thead class="table-dark">
 <tr>
 <th>Fazenda</th>
 <th>Total animais</th>
 </tr>
+</thead>
+
+<tbody>
 
 @foreach($fazendas as $fazenda)
 
@@ -20,4 +33,11 @@
 
 @endforeach
 
+</tbody>
+
 </table>
+
+</div>
+</div>
+
+@endsection

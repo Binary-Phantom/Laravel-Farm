@@ -36,6 +36,12 @@ Gados
 </a>
 </li>
 
+<li class="nav-item">
+<a class="nav-link" href="{{ route('relatorios.index') }}">
+Relatórios
+</a>
+</li>
+
 </ul>
 
 </div>

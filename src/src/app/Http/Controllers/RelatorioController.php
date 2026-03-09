@@ -27,12 +27,14 @@ class RelatorioController extends Controller
     }
 
     // animais abatidos por período
+
     public function abatePeriodo(Request $request)
     {
         $inicio = $request->inicio;
         $fim = $request->fim;
 
-        $gados = Gado::whereNotNull('abatido_em')
+        $gados = Gado::with('fazenda')
+            ->whereNotNull('abatido_em')
             ->whereBetween('abatido_em', [$inicio, $fim])
             ->get();
 
@@ -50,27 +52,26 @@ class RelatorioController extends Controller
     }
 
     public function index()
-{
-    $fazendas = Fazenda::with(['gados' => function($q){
-        $q->whereNull('abatido_em');
-    }])->get();
+    {
+        $fazendas = Fazenda::with(['gados' => function($q){
+            $q->whereNull('abatido_em');
+        }])->get();
 
-    $totalFazendas = Fazenda::count();
+        foreach ($fazendas as $fazenda) {
 
-    $totalAnimais = Gado::whereNull('abatido_em')->count();
+            $gados = $fazenda->gados;
 
-    $totalLeite = Gado::whereNull('abatido_em')->sum('leite_semana');
+            $fazenda->total_animais = $gados->count();
 
-    $totalRacao = Gado::whereNull('abatido_em')->sum('racao_semana');
+            $fazenda->total_leite = $gados->sum('leite_semana');
 
-    return view('relatorios.index', compact(
-        'fazendas',
-        'totalFazendas',
-        'totalAnimais',
-        'totalLeite',
-        'totalRacao'
-    ));
-}
+            $fazenda->total_racao = $gados->sum('racao_semana');
+
+            $fazenda->peso_medio = $gados->avg('peso');
+        }
+
+        return view('relatorios.index', compact('fazendas'));
+    }
 
     public function jovensAltoConsumo()
     {

@@ -139,7 +139,12 @@ new Chart(document.getElementById('graficoGados'), {
                 '#2196F3',
                 '#FFC107',
                 '#FF5722',
-                '#9C27B0'
+                '#9C27B0',
+                '#ce1049',
+                '#bdba0c',
+                '#85f794',
+                '#1c0877',
+                '#de82f5'
             ]
         }]
     }
