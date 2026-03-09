@@ -29,10 +29,8 @@
     <td>{{ $gado->racao_semana }}</td>
     <td>{{ $gado->peso }}</td>
     <td>{{ number_format($gado->pesoEmArrobas(), 2) }}</td>
+    <td>{{ $gado->nascimento->format('d/m/Y') }}</td>
 
-    <td>{{ $gado->nascimento }}</td>
-
-```
 <td>
     @if($gado->estaVivo())
         Vivo
@@ -57,7 +55,7 @@
     </form>
     @endif
 </td>
-```
+
 
 </tr>
 @endforeach
