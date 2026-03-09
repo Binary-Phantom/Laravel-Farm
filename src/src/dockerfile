@@ -24,7 +24,7 @@ RUN docker-php-ext-install \
 
 RUN a2enmod rewrite
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 COPY . .
 
@@ -35,7 +35,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
