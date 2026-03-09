@@ -34,7 +34,7 @@ class VeterinarioController extends Controller
     {
         $request->validate([
         'nome' => 'required|string|max:255',
-        'crmv' => 'required|string|max:20|unique:veterinarios,crmv'
+        'crmv' => 'required|string|max:20|unique:veterinarios,crmv' //substitui o id padrão pelo o crmv
         ]);
 
         Veterinario::create($request->all());

@@ -20,7 +20,7 @@
 
             <form action="{{ route('veterinarios.destroy', $veterinario->crmv) }}" method="POST" style="display:inline;">
     @csrf
-    @method('DELETE') <!-- essencial para que Laravel reconheça como DELETE -->
+    @method('DELETE')
     <button type="submit" onclick="return confirm('Deseja realmente excluir?')">Excluir</button>
     </form>
         </td>

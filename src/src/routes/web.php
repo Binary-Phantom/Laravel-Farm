@@ -13,9 +13,12 @@ Route::resource('gados', GadoController::class)->except(['show']);
 Route::resource('veterinarios', VeterinarioController::class);
 Route::resource('fazendas', FazendaController::class);
 //Route::resource('gados', GadoController::class);
-Route::get('/relatorios/leite', [RelatorioController::class, 'leitePorFazenda']);
-Route::get('/relatorios/racao', [RelatorioController::class, 'racaoPorFazenda']);
+//Route::get('/relatorios/leite', [RelatorioController::class, 'leitePorFazenda']);
+//Route::get('/relatorios/racao', [RelatorioController::class, 'racaoPorFazenda']);
+Route::get('/relatorios/leite', [RelatorioController::class, 'leitePorFazenda'])->name('relatorios.leite');
+Route::get('/relatorios/racao', [RelatorioController::class, 'racaoPorFazenda'])->name('relatorios.racao');
 Route::get('/relatorios/abate', [RelatorioController::class, 'abatePeriodo']);
+Route::get('/relatorios/consumo', [RelatorioController::class, 'jovensAltoConsumo'])->name('relatorios.consumo');
 Route::get('/relatorios/animais', [RelatorioController::class, 'animaisPorFazenda']);
 Route::get('/relatorios', [RelatorioController::class, 'index'])
     ->name('relatorios.index');

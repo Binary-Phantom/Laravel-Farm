@@ -72,4 +72,17 @@ class RelatorioController extends Controller
     ));
 }
 
+    public function jovensAltoConsumo()
+    {
+        $gados = Gado::with('fazenda')
+        ->whereNull('abatido_em')
+        ->get()
+        ->filter(function ($g) {
+            return $g->idade() < 2 && $g->racaoPorDia() > 50;
+        });
+
+        return view('relatorios.consumo', compact('gados'));
+    }
+
+
 }

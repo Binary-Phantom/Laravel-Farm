@@ -1,52 +1,87 @@
-<h1>Fazendas</h1>
+@extends('app.app')
 
-<a href="{{ route('fazendas.create') }}">
-    Nova Fazenda
+@section('content')
+
+<div class="d-flex justify-content-between mb-3">
+<h2>Fazendas</h2>
+
+<a href="{{ route('fazendas.create') }}" class="btn btn-success">
+Nova Fazenda
 </a>
+</div>
 
 @if(session('success'))
-    <p style="color:green">{{ session('success') }}</p>
+<div class="alert alert-success">
+{{ session('success') }}
+</div>
 @endif
 
-<table border="1">
+<div class="card">
+<div class="card-body">
+
+<table class="table table-striped table-bordered">
+
+<thead class="table-dark">
 <tr>
-    <th>Nome</th>
-    <th>Hectares</th>
-    <th>Responsável</th>
-    <th>Veterinários</th>
-    <th>Ações</th>
+<th>Nome</th>
+<th>Hectares</th>
+<th>Responsável</th>
+<th>Veterinários</th>
+<th width="180">Ações</th>
 </tr>
+</thead>
+
+<tbody>
 
 @foreach($fazendas as $fazenda)
+
 <tr>
-    <td>{{ $fazenda->nome }}</td>
-    <td>{{ $fazenda->tamanho}}</td>
 
-    {{-- ✅ responsável --}}
-    <td>
-        {{ $fazenda->responsavel }}
-    </td>
+<td>{{ $fazenda->nome }}</td>
 
-    {{-- ✅ vários veterinários --}}
-    <td>
-        {{ $fazenda->veterinarios->pluck('nome')->join(', ') }}
-    </td>
+<td>{{ $fazenda->tamanho }}</td>
 
-    <td>
-        <a href="{{ route('fazendas.edit',$fazenda->id) }}">
-            Editar
-        </a>
+<td>{{ $fazenda->responsavel }}</td>
 
-        <form action="{{ route('fazendas.destroy',$fazenda->id) }}"
-              method="POST"
-              style="display:inline">
-            @csrf
-            @method('DELETE')
-            <button>Excluir</button>
-        </form>
-    </td>
+<td>
+{{ $fazenda->veterinarios->pluck('nome')->join(', ') }}
+</td>
+
+<td>
+
+<a href="{{ route('fazendas.edit',$fazenda->id) }}"
+class="btn btn-primary btn-sm">
+Editar
+</a>
+
+<form action="{{ route('fazendas.destroy',$fazenda->id) }}"
+method="POST"
+style="display:inline">
+
+@csrf
+@method('DELETE')
+
+<button class="btn btn-danger btn-sm">
+Excluir
+</button>
+
+</form>
+
+</td>
+
 </tr>
+
 @endforeach
+
+</tbody>
+
 </table>
 
+</div>
+</div>
+
+<div class="mt-3">
 {{ $fazendas->links() }}
+</div>
+
+@endsection

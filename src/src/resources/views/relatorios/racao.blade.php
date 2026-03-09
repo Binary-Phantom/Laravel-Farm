@@ -1,3 +1,7 @@
+@extends('app.app')
+@section('content')
+
+
 <h1>Consumo de Ração por Fazenda</h1>
 
 <table border="1">
@@ -20,3 +24,5 @@
 @endforeach
 
 </table>
+
+@endsection

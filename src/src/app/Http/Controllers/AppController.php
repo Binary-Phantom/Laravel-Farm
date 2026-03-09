@@ -30,13 +30,40 @@ class AppController extends Controller
 
         $totalVeterinarios = Veterinario::count();
 
+
+        //para gerar os gráficos no dashboard
+        
+        $fazendas = Fazenda::with(['gados' => function ($q) {
+        $q->whereNull('abatido_em');
+        }])->get();
+
+            $nomesFazendas = [];
+            $leiteFazendas = [];
+            $racaoFazendas = [];
+            $gadosFazendas = [];
+
+        foreach ($fazendas as $fazenda) {
+
+            $nomesFazendas[] = $fazenda->nome;
+
+            $leiteFazendas[] = $fazenda->gados->sum('leite_semana');
+
+            $racaoFazendas[] = $fazenda->gados->sum('racao_semana');
+
+            $gadosFazendas[] = $fazenda->gados->count();
+        }
+
         return view('app.index', compact(
             'totalLeite',
             'totalRacao',
             'animaisJovensAltoConsumo',
             'totalGados',
             'totalFazendas',
-            'totalVeterinarios'
-        ));
+            'totalVeterinarios',
+            'nomesFazendas',
+            'leiteFazendas',
+            'racaoFazendas',
+            'gadosFazendas'
+            ));
     }
 }

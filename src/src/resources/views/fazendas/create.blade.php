@@ -1,33 +1,60 @@
+@extends('app.app')
+
+@section('content')
+
+<h2>Nova Fazenda</h2>
+
+<div class="card">
+<div class="card-body">
+
 <form action="{{ route('fazendas.store') }}" method="POST">
+
 @csrf
 
-<label>Nome:</label>
-<input type="text" name="nome" required>
+<div class="mb-3">
+<label class="form-label">Nome</label>
+<input type="text" name="nome" class="form-control" required>
+</div>
 
-<br><br>
+<div class="mb-3">
+<label class="form-label">Tamanho (hectares)</label>
+<input type="number" step="0.01" name="tamanho" class="form-control" required>
+</div>
 
-<label>Tamanho (hectares):</label>
-<input type="number" step="0.01" name="tamanho" required>
+<div class="mb-3">
+<label class="form-label">Responsável</label>
+<input type="text" name="responsavel" class="form-control" required>
+</div>
 
-<br><br>
+<div class="mb-3">
 
-<label>Responsável pela Fazenda:</label>
-<input type="text" name="responsavel" required>
+<label class="form-label">Veterinários Vinculados</label>
 
-<br><br>
+<select name="veterinarios[]" class="form-select" multiple size="5" required>
 
-<h3>Veterinários Vinculados</h3>
-
-<select name="veterinarios[]" multiple size="5" required>
 @foreach($veterinarios as $vet)
-    <option value="{{ $vet->crmv }}">
-        {{ $vet->nome }} - CRMV {{ $vet->crmv }}
-    </option>
+
+<option value="{{ $vet->crmv }}">
+{{ $vet->nome }} - CRMV {{ $vet->crmv }}
+</option>
+
 @endforeach
+
 </select>
 
-<br><br>
+</div>
 
-<button type="submit">Salvar</button>
+<button class="btn btn-success">
+Salvar
+</button>
+
+<a href="{{ route('fazendas.index') }}" class="btn btn-secondary">
+Cancelar
+</a>
 
 </form>
+
+</div>
+</div>
+
+@endsection
