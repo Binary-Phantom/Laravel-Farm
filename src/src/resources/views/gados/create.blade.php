@@ -1,52 +1,84 @@
-<h1>Novo Gado</h1>
+@extends('app.app')
+
+@section('content')
+
+<h2>Novo Gado</h2>
 
 @if ($errors->any())
 
-<ul style="color:red">
+<div class="alert alert-danger">
+<ul>
+
 @foreach ($errors->all() as $erro)
 <li>{{ $erro }}</li>
 @endforeach
+
 </ul>
+</div>
+
 @endif
 
+<div class="card">
+<div class="card-body">
+
 <form action="{{ route('gados.store') }}" method="POST">
+
 @csrf
 
-<label>Código</label> <input type="number" name="codigo" required>
+<div class="mb-3">
+<label class="form-label">Código</label>
+<input type="number" name="codigo" class="form-control" required>
+</div>
 
-<br><br>
+<div class="mb-3">
+<label class="form-label">Leite por semana (Litros)</label>
+<input type="number" step="0.1" name="leite_semana" class="form-control" required>
+</div>
 
-<label>Leite por semana (Litros)</label> <input type="number" step="0.1" name="leite_semana" required>
+<div class="mb-3">
+<label class="form-label">Ração por semana (Kg)</label>
+<input type="number" name="racao_semana" class="form-control" required>
+</div>
 
-<br><br>
+<div class="mb-3">
+<label class="form-label">Peso (Kg)</label>
+<input type="number" step="0.1" name="peso" class="form-control" required>
+</div>
 
-<label>Ração por semana (Kg)</label> <input type="number" name="racao_semana" required>
+<div class="mb-3">
+<label class="form-label">Nascimento</label>
+<input type="date" name="nascimento" class="form-control" required>
+</div>
 
-<br><br>
+<div class="mb-3">
 
-<label>Peso (Kg)</label> <input type="number" step="0.1" name="peso" required>
+<label class="form-label">Fazenda</label>
 
-<br><br>
+<select name="fazenda_id" class="form-select" required>
 
-<label>Data de nascimento</label> <input type="date" name="nascimento" required>
-
-<br><br>
-
-<label>Fazenda</label> <select name="fazenda_id" required>
 @foreach($fazendas as $fazenda)
 
 <option value="{{ $fazenda->id }}">
 {{ $fazenda->nome }}
 </option>
+
 @endforeach
+
 </select>
 
-<br><br>
+</div>
 
-<button type="submit">Salvar</button>
+<button class="btn btn-success">
+Salvar
+</button>
+
+<a href="{{ route('gados.index') }}" class="btn btn-secondary">
+Voltar
+</a>
 
 </form>
 
-<br>
+</div>
+</div>
 
-<a href="{{ route('gados.index') }}">Voltar</a>
+@endsection
