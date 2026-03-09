@@ -27,9 +27,9 @@ Voltar
 <th>Código</th>
 <th>Fazenda</th>
 <th>Idade</th>
-<th>Peso</th>
-<th>Leite/semana</th>
-<th>Ração/semana</th>
+<th>Peso (KG)</th>
+<th>Leite/semana (L)</th>
+<th>Ração/semana (KG)</th>
 <th>Ação</th>
 </tr>
 

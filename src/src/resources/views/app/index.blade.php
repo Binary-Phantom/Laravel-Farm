@@ -144,7 +144,10 @@ new Chart(document.getElementById('graficoGados'), {
                 '#bdba0c',
                 '#85f794',
                 '#1c0877',
-                '#de82f5'
+                '#0cad85',
+                '#358a04',
+                '#aa4d49',
+                '#7e2458',
             ]
         }]
     }

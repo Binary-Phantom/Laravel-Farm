@@ -13,7 +13,7 @@
 <thead class="table-dark">
 <tr>
 <th>Fazenda</th>
-<th>Ração / semana</th>
+<th>Ração / semana (KG)</th>
 </tr>
 </thead>
 

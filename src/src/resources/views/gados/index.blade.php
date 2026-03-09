@@ -8,6 +8,9 @@
 <a href="{{ route('gados.create') }}" class="btn btn-success">
 Novo Gado
 </a>
+<a href="{{ route('gados.abate') }}" class="btn btn-success">
+Elegíveis para Abate
+</a>
 </div>
 
 @if(session('success'))

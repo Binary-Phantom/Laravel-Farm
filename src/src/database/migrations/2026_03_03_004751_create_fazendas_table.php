@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('fazenda', function (Blueprint $table) {
             $table->id();
+            $table ->unique('nome'); //se der ruim foi aqui que eu mexi
             $table->timestamps();
         });
     }

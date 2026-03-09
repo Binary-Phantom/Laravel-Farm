@@ -3,6 +3,11 @@
 
 <div class="d-flex justify-content-between mb-3">
 <h2>Relatório Consolidado das Fazendas</h2>
+
+<a href="{{ route('relatorios.abate') }}" class="btn btn-success">
+Animais já Abatidos
+</a>
+
 </div>
 
 <div class="card">

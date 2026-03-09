@@ -39,6 +39,14 @@ class FazendaController extends Controller
             'responsavel' => 'required|string|max:255',
             'veterinarios' => 'required|array|min:1',
             'veterinarios.*' => 'exists:veterinarios,crmv',
+        ], [
+            'nome.unique' => 'A propriedade já existe.',
+            'nome.required' => 'O nome da fazenda é obrigatório.',
+            'tamanho.required' => 'O tamanho da fazenda é obrigatório.',
+            'tamanho.numeric' => 'O tamanho deve ser um número.',
+            'tamanho.min' => 'O tamanho deve ser maior que zero.',
+            'responsavel.required' => 'O responsável é obrigatório.',
+            'veterinarios.required' => 'Selecione pelo menos um veterinário.'
         ]);
 
         $fazenda = Fazenda::create([

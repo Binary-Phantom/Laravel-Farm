@@ -24,23 +24,31 @@ class GadoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
+        [
             'codigo' => [
-            'required',
+                'required',
                 function ($attribute, $value, $fail) {
-                $existe = Gado::where('codigo', $value)
-                ->whereNull('abatido_em')
-                ->exists();
-                if ($existe) {
-                    $fail('Já existe um gado vivo com esse código.');
-                }
+
+                    $existe = Gado::where('codigo', $value)
+                        ->whereNull('abatido_em')
+                        ->exists();
+
+                    if ($existe) {
+                        $fail('Já existe um animal vivo com esse código.');
+                    }
                 }
             ],
+
             'leite_semana' => 'required|numeric',
             'racao_semana' => 'required|integer',
             'peso' => 'required|numeric',
             'nascimento' => 'required|date|before_or_equal:today',
             'fazenda_id' => 'required|exists:fazendas,id',
+        ],
+        [
+            'nascimento.before_or_equal' => 'A data de nascimento não pode ser futura.',
+            'nascimento.required' => 'A data de nascimento é obrigatória.'
         ]);
 
         $fazenda = Fazenda::findOrFail($request->fazenda_id);
@@ -85,6 +93,10 @@ class GadoController extends Controller
             'peso' => 'required|numeric',
             'nascimento' => 'required|date|before_or_equal:today',
             'fazenda_id' => 'required|exists:fazendas,id',
+            [
+            'nascimento.before_or_equal' => 'A data de nascimento não pode ser futura.',
+            'nascimento.required' => 'A data de nascimento é obrigatória.'
+            ]
         ]);
 
         $gado->update($request->all());

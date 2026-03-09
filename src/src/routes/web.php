@@ -17,7 +17,7 @@ Route::resource('fazendas', FazendaController::class);
 //Route::get('/relatorios/racao', [RelatorioController::class, 'racaoPorFazenda']);
 Route::get('/relatorios/leite', [RelatorioController::class, 'leitePorFazenda'])->name('relatorios.leite');
 Route::get('/relatorios/racao', [RelatorioController::class, 'racaoPorFazenda'])->name('relatorios.racao');
-Route::get('/relatorios/abate', [RelatorioController::class, 'abatePeriodo']);
+Route::get('/relatorios/abate', [RelatorioController::class, 'abatePeriodo'])->name('relatorios.abate');
 Route::get('/relatorios/consumo', [RelatorioController::class, 'jovensAltoConsumo'])->name('relatorios.consumo');
 Route::get('/relatorios/animais', [RelatorioController::class, 'animaisPorFazenda']);
 Route::get('/relatorios', [RelatorioController::class, 'index'])
@@ -30,7 +30,7 @@ Route::post('/gados/{id}/abater', [GadoController::class, 'abater'])
     ->name('gados.abater');
 
 Route::get('/gados/abate', [GadoController::class, 'paraAbate'])
-    ->name('gados.paraAbate');
+    ->name('gados.abate');
 
 Route::get('/', function () {
     return view('welcome');
