@@ -23,9 +23,8 @@ Route::get('/relatorios/animais', [RelatorioController::class, 'animaisPorFazend
 Route::get('/relatorios', [RelatorioController::class, 'index'])
     ->name('relatorios.index');
 
-Route::get('/laravel-farm', [AppController::class, 'index'])
-    ->name('app');
-    
+Route::get('/laravel-farm', [AppController::class, 'index'])->name('laravel-farm');
+
 Route::get('/', [AppController::class, 'index'])->name('app');
 
 Route::post('/gados/{id}/abater', [GadoController::class, 'abater'])
