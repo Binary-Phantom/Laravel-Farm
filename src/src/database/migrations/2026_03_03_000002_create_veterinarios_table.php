@@ -6,23 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('fazendas', function (Blueprint $table) {
-            $table->id();
-            //$table ->unique('nome'); //se der ruim foi aqui que eu mexi (Deu ruim)
+        Schema::create('veterinarios', function (Blueprint $table) {
+            $table->string('crmv', 5)->primary();
+            $table->string('nome');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('fazendas');
+        Schema::dropIfExists('veterinarios');
     }
 };

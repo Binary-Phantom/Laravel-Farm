@@ -6,23 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('gados', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
-            $table->integer('leite_semana')->default(0); // <-- coluna que estava faltando
-            $table->date('abatido_em')->nullable(); // se estiver usando no código
+            $table->bigInteger('codigo')->unique();
+            $table->decimal('leite_semana', 4, 1)->default(0);
+            $table->bigInteger('racao_semana')->default(0);
+            $table->float('peso', 5, 1)->default(0);
+            $table->date('nascimento');
+            $table->dateTime('abatido_em')->nullable();
+            $table->foreignId('fazenda_id')->constrained('fazendas')->cascadeOnDelete();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('gados');
