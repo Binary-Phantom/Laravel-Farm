@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('gados', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo')->unique();
+            $table->integer('leite_semana')->default(0); // <-- coluna que estava faltando
+            $table->date('abatido_em')->nullable(); // se estiver usando no código
             $table->timestamps();
         });
     }
