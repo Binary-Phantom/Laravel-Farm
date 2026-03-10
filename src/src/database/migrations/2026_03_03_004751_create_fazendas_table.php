@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fazenda', function (Blueprint $table) {
+        Schema::create('fazendas', function (Blueprint $table) {
             $table->id();
-            $table ->unique('nome'); //se der ruim foi aqui que eu mexi
+            //$table ->unique('nome'); //se der ruim foi aqui que eu mexi (Deu ruim)
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fazenda');
+        Schema::dropIfExists('fazendas');
     }
 };
