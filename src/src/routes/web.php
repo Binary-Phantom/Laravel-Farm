@@ -25,6 +25,8 @@ Route::get('/relatorios', [RelatorioController::class, 'index'])
 
 Route::get('/laravel-farm', [AppController::class, 'index'])
     ->name('app');
+    
+Route::get('/', [AppController::class, 'index'])->name('app');
 
 Route::post('/gados/{id}/abater', [GadoController::class, 'abater'])
     ->name('gados.abater');
@@ -32,6 +34,7 @@ Route::post('/gados/{id}/abater', [GadoController::class, 'abater'])
 Route::get('/gados/abate', [GadoController::class, 'paraAbate'])
     ->name('gados.abate');
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
 });
+*/
