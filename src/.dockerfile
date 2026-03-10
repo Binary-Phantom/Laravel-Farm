@@ -7,9 +7,11 @@ RUN apt-get update && apt-get install -y \
     curl \
     libpq-dev \
     libpng-dev \
+    apt-get update && apt-get install -y \
     libonig-dev \
-    libxml2-dev \
+    && docker-php-ext-install mbstring    libxml2-dev \
     libzip-dev \
+    libxml2-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
