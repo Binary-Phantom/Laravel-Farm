@@ -28,8 +28,7 @@ WORKDIR /var/www/html
 
 COPY src/src/ .
 
-RUN chmod -R 775 storage bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

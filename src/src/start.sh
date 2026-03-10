@@ -2,6 +2,10 @@
 # start.sh - roda Artisan e Apache em produção
 
 # Garante chave do app
+
+mkdir -p storage/logs storage/framework/views bootstrap/cache
+chmod -R 777 storage bootstrap/cache
+
 if ! php artisan key:show > /dev/null 2>&1; then
     php artisan key:generate
 fi
