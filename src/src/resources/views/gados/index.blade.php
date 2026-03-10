@@ -5,19 +5,23 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
-<h2>Gados</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Gados</h2>
 
-<a href="{{ route('gados.create') }}" class="btn btn-success">
-Novo Gado
-</a>
-<a href="{{ route('gados.abate') }}" class="btn btn-danger">
-Elegíveis para Abate
-</a>
+    <div>
+        <a href="{{ route('gados.create') }}" class="btn btn-success">
+            Novo Gado
+        </a>
+
+        <a href="{{ route('gados.abate') }}" class="btn btn-danger">
+            Elegíveis para Abate
+        </a>
+    </div>
+</div>
 
 @if(session('success'))
 <div class="alert alert-success">
-{{ session('success') }}
+    {{ session('success') }}
 </div>
 @endif
 
