@@ -64,7 +64,7 @@
 <div class="col-md-4">
 <div class="card">
 <div class="card-body">
-<h5>Total de Gados</h5>
+<h5>Animais Cadastrados</h5>
 <h3>{{ $totalGados }}</h3>
 </div>
 </div>
