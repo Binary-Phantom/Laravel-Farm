@@ -32,7 +32,7 @@ Veterinários
 
 <li class="nav-item">
 <a class="nav-link" href="{{ route('gados.index') }}">
-Gados
+Animais
 </a>
 </li>
 

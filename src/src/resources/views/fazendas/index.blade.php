@@ -1,3 +1,6 @@
+<!-- Página inicial menu fazenda !-->
+
+
 @extends('app.app')
 
 @section('content')

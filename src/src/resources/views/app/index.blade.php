@@ -88,7 +88,7 @@
 <div class="row mt-4 g-5">
 
 <div class="col-md-6 mx-auto">
-<h4>Distribuição de Gados por Fazenda</h4>
+<h4>Distribuição de Animais por Fazenda</h4>
 <canvas id="graficoGados"></canvas>
 </div>
 

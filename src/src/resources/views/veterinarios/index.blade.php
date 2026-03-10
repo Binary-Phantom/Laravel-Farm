@@ -1,3 +1,5 @@
+<!-- Página inicial menu vets !-->
+
 @extends('app.app')
 
 @section('content')
@@ -5,7 +7,7 @@
 <div class="d-flex justify-content-between mb-3">
 <h2>Veterinários</h2>
 
-<a href="{{ route('veterinarios.create') }}" class="btn btn-success">
+<a href="{{ route('veterinarios.create') }}" class="btn btn-primary">
 Novo Veterinário
 </a>
 </div>
