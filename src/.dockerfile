@@ -7,11 +7,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     libpq-dev \
     libpng-dev \
-    apt-get update && apt-get install -y \
     libonig-dev \
-    && docker-php-ext-install mbstring    libxml2-dev \
-    libzip-dev \
     libxml2-dev \
+    libzip-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
@@ -26,9 +24,9 @@ RUN docker-php-ext-install \
 
 RUN a2enmod rewrite
 
-WORKDIR /var/www/html
+WORKDIR /var/www/
 
-COPY src/src/ .
+COPY . .
 
 RUN chmod -R 775 storage bootstrap/cache
 
@@ -36,7 +34,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
