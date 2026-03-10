@@ -28,10 +28,9 @@ WORKDIR /var/www/
 
 COPY . .
 
-RUN chmod -R 775 storage bootstrap/cache
+RUN chmod -R 777 storage bootstrap/cache
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 RUN composer install --no-dev --optimize-autoloader
 
 RUN sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf
