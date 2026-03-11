@@ -4,157 +4,102 @@
 
 <h2 class="mb-4">Dashboard</h2>
 
-<div class="row">
+<div class="row g-3">
 
-<div class="col-md-4">
-<a href="{{ route('relatorios.leite') }}" style="text-decoration:none">
-<div class="card text-white bg-success mb-3">
+<div class="col-12 col-md-4">
+<div class="card shadow-sm border-0 text-bg-primary">
+<div class="card-body text-center">
+<h6>Total de Leite (L)</h6>
+<h2>{{ $totalLeite }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-4">
+<div class="card shadow-sm border-0 text-bg-success">
+<div class="card-body text-center">
+<h6>Ração Necessária (kg)</h6>
+<h2>{{ $totalRacao }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-4">
+<div class="card shadow-sm border-0 text-bg-warning">
+<div class="card-body text-center">
+<h6>Animais Jovens</h6>
+<h2>{{ $animaisJovens }}</h2>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="row mt-4 g-4">
+
+<div class="col-12 col-lg-6">
+<div class="card shadow-sm">
 <div class="card-body">
-<h5>Total de Leite / Semana</h5>
-<h2>{{ $totalLeite }} L</h2>
-</div>
-</div>
-</a>
-</div>
+<h5 class="mb-3">Produção de Leite</h5>
 
-<div class="col-md-4">
-<a href="{{ route('relatorios.racao') }}" style="text-decoration:none">
-<div class="card text-white bg-warning mb-3">
-<div class="card-body">
-<h5>Ração total necessária / Semana</h5>
-<h2>{{ $totalRacao }} Kg</h2>
-</div>
-</div>
-</a>
-</div>
-
-<div class="col-md-4">
-<a href="{{ route('relatorios.consumo') }}" style="text-decoration:none">
-<div class="card text-white bg-info mb-3">
-<div class="card-body">
-<h5>Animais jovens de alto consumo</h5>
-<h2>{{ $animaisJovensAltoConsumo }}</h2>
-</div>
-</div>
-</a>
-</div>
-
-</div>
-
-<div class="row">
-
-<div class="col-md-4">
-<div class="card">
-<div class="card-body">
-<h5>Fazendas</h5>
-<h3>{{ $totalFazendas }}</h3>
-</div>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card">
-<div class="card-body">
-<h5>Veterinários</h5>
-<h3>{{ $totalVeterinarios }}</h3>
-</div>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card">
-<div class="card-body">
-<h5>Animais Cadastrados</h5>
-<h3>{{ $totalGados }}</h3>
-</div>
-</div>
-</div>
-
-
-<div class="row mt-5 g-5">
-
-<div class="col-md-6">
-<h4>Produção de Leite por Fazenda</h4>
 <canvas id="graficoLeite"></canvas>
+
+</div>
+</div>
 </div>
 
-<div class="col-md-6 g-5">
-<h4>Consumo de Ração por Fazenda</h4>
+<div class="col-12 col-lg-6">
+<div class="card shadow-sm">
+<div class="card-body">
+<h5 class="mb-3">Consumo de Ração</h5>
+
 <canvas id="graficoRacao"></canvas>
+
+</div>
+</div>
 </div>
 
 </div>
 
-<div class="row mt-4 g-5">
-
-<div class="col-md-6 mx-auto">
-<h4>Distribuição de Animais por Fazenda</h4>
-<canvas id="graficoGados"></canvas>
-</div>
-
-</div>
 
 <script>
 
-const nomes = @json($nomesFazendas);
-const leite = @json($leiteFazendas);
-const racao = @json($racaoFazendas);
-const gados = @json($gadosFazendas);
+const graficoLeite = new Chart(
+document.getElementById('graficoLeite'),
+{
+type: 'bar',
 
-// gráfico leite
-new Chart(document.getElementById('graficoLeite'), {
-    type: 'bar',
-    data: {
-        labels: nomes,
-        datasets: [{
-            label: 'Leite semanal (L)',
-            data: leite,
-            backgroundColor: 'rgba(40,167,69,0.7)'
-        }]
-    }
-});
+data: {
+labels: {!! json_encode($fazendas->pluck('nome')) !!},
 
-// gráfico ração
-new Chart(document.getElementById('graficoRacao'), {
-    type: 'bar',
-    data: {
-        labels: nomes,
-        datasets: [{
-            label: 'Ração semanal (Kg)',
-            data: racao,
-            backgroundColor: 'rgba(255,193,7,0.7)'
-        }]
-    }
-});
+datasets: [{
+label: 'Leite por Fazenda',
+data: {!! json_encode($fazendas->map(fn($f)=>$f->gados->sum('leite'))) !!}
+}]
+}
 
-// gráfico distribuição de gados
-new Chart(document.getElementById('graficoGados'), {
-    type: 'pie',
-    data: {
-        labels: nomes,
-        datasets: [{
-            data: gados,
-            backgroundColor: [
-                '#4CAF50',
-                '#2196F3',
-                '#FFC107',
-                '#FF5722',
-                '#9C27B0',
-                '#ce1049',
-                '#bdba0c',
-                '#85f794',
-                '#1c0877',
-                '#0cad85',
-                '#358a04',
-                '#aa4d49',
-                '#7e2458',
-            ]
-        }]
-    }
-});
+}
+);
+
+
+
+const graficoRacao = new Chart(
+document.getElementById('graficoRacao'),
+{
+type: 'pie',
+
+data: {
+labels: ['Ração necessária','Outros'],
+
+datasets: [{
+data: [{{ $totalRacao }}, 100]
+}]
+}
+
+}
+);
 
 </script>
-
-</div>
 
 @endsection

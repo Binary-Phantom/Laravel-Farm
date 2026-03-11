@@ -21,7 +21,6 @@
 🐄 Laravel Farm
 </a>
 
-<!-- botão hamburguer (mobile) -->
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
 <span class="navbar-toggler-icon"></span>
 </button>
