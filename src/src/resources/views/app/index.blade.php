@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2 class="mb-4">Dashboard</h2>
+<h2 class="mb-4">📊 Dashboard</h2>
 
 <div class="row g-3">
 
@@ -27,8 +27,8 @@
 <div class="col-12 col-md-4">
 <div class="card shadow-sm border-0 text-bg-warning">
 <div class="card-body text-center">
-<h6>Animais Jovens</h6>
-<h2>{{ $animaisJovens }}</h2>
+<h6>Animais Jovens com Alto Consumo</h6>
+<h2>{{ $animaisJovensAltoConsumo }}</h2>
 </div>
 </div>
 </div>
