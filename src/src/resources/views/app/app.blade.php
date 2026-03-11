@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
+<style>
+
+.card-link{
+text-decoration:none;
+color:inherit;
+}
+
+.card{
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover{
+transform: translateY(-6px);
+box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+</style>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
