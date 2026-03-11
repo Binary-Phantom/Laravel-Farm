@@ -2,29 +2,31 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
-<h2>Relatório de Abates</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+<h2 class="mb-0">Relatório de Abates</h2>
 </div>
 
-<div class="card mb-3">
+<div class="card mb-3 shadow-sm">
 <div class="card-body">
 
 <form method="GET" class="row g-3">
 
-<div class="col-md-4">
+<div class="col-12 col-md-4">
 <label class="form-label">Data início</label>
 <input type="date" name="inicio" class="form-control">
 </div>
 
-<div class="col-md-4">
+<div class="col-12 col-md-4">
 <label class="form-label">Data fim</label>
 <input type="date" name="fim" class="form-control">
 </div>
 
-<div class="col-md-4 align-self-end">
-<button type="submit" class="btn btn-primary">
+<div class="col-12 col-md-4 align-self-end">
+
+<button type="submit" class="btn btn-primary w-100">
 Buscar
 </button>
+
 </div>
 
 </form>
@@ -32,17 +34,19 @@ Buscar
 </div>
 </div>
 
-<div class="card">
+<div class="card shadow-sm">
 <div class="card-body">
 
-<table class="table table-striped table-bordered">
+<div class="table-responsive">
+
+<table class="table table-striped table-bordered align-middle">
 
 <thead class="table-dark">
 <tr>
 <th>Código</th>
 <th>Fazenda</th>
 <th>Peso (Kg)</th>
-<th>Peso (Arrobas)</th>
+<th>Peso (@)</th>
 <th>Data abate</th>
 </tr>
 </thead>
@@ -52,23 +56,16 @@ Buscar
 @foreach($gados as $gado)
 
 <tr>
+
 <td>{{ $gado->codigo }}</td>
 
-<td>
-{{ $gado->fazenda->nome ?? '-' }}
-</td>
+<td>{{ $gado->fazenda->nome ?? '-' }}</td>
 
-<td>
-{{ $gado->peso }}
-</td>
+<td>{{ $gado->peso }}</td>
 
-<td>
-{{ number_format($gado->peso / 15, 2) }} @
-</td>
+<td>{{ number_format($gado->peso / 15,2) }} @</td>
 
-<td>
-{{ $gado->abatido_em->format('d/m/Y') }}
-</td>
+<td>{{ $gado->abatido_em->format('d/m/Y') }}</td>
 
 </tr>
 
@@ -77,6 +74,8 @@ Buscar
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 </div>

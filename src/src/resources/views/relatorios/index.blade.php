@@ -1,8 +1,9 @@
 @extends('app.app')
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
-<h2>Relatório Consolidado das Fazendas</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+
+<h2 class="mb-0">Relatório Consolidado das Fazendas</h2>
 
 <a href="{{ route('relatorios.abate') }}" class="btn btn-success">
 Animais já Abatidos
@@ -10,10 +11,12 @@ Animais já Abatidos
 
 </div>
 
-<div class="card">
+<div class="card shadow-sm">
 <div class="card-body">
 
-<table class="table table-striped table-bordered">
+<div class="table-responsive">
+
+<table class="table table-striped table-bordered align-middle">
 
 <thead class="table-dark">
 <tr>
@@ -47,6 +50,7 @@ Animais já Abatidos
 
 </table>
 
+</div>
 </div>
 </div>
 

@@ -1,15 +1,15 @@
-<!-- Página inicial menu vets !-->
-
 @extends('app.app')
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
-<h2>Veterinários</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+
+<h2 class="mb-0">Veterinários</h2>
 
 <a href="{{ route('veterinarios.create') }}" class="btn btn-primary">
 Novo Veterinário
 </a>
+
 </div>
 
 @if(session('success'))
@@ -18,17 +18,21 @@ Novo Veterinário
 </div>
 @endif
 
-<div class="card">
+<div class="card shadow-sm">
 <div class="card-body">
 
-<table class="table table-striped table-bordered">
+<div class="table-responsive">
+
+<table class="table table-striped table-bordered align-middle">
 
 <thead class="table-dark">
+
 <tr>
 <th>CRMV</th>
 <th>Nome</th>
 <th width="180">Ações</th>
 </tr>
+
 </thead>
 
 <tbody>
@@ -36,10 +40,14 @@ Novo Veterinário
 @foreach($veterinarios as $veterinario)
 
 <tr>
+
 <td>{{ $veterinario->crmv }}</td>
+
 <td>{{ $veterinario->nome }}</td>
 
 <td>
+
+<div class="d-flex flex-column flex-md-row gap-2">
 
 <a href="{{ route('veterinarios.edit', $veterinario->crmv) }}"
 class="btn btn-primary btn-sm">
@@ -47,8 +55,7 @@ Editar
 </a>
 
 <form action="{{ route('veterinarios.destroy', $veterinario->crmv) }}"
-method="POST"
-style="display:inline">
+method="POST">
 
 @csrf
 @method('DELETE')
@@ -58,6 +65,8 @@ Excluir
 </button>
 
 </form>
+
+</div>
 
 </td>
 
@@ -69,6 +78,7 @@ Excluir
 
 </table>
 
+</div>
 </div>
 </div>
 

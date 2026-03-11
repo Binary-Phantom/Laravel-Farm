@@ -6,10 +6,12 @@
 <h2>Animais vivos por fazenda</h2>
 </div>
 
-<div class="card">
+<div class="card shadow-sm">
 <div class="card-body">
 
-<table class="table table-striped table-bordered">
+<div class="table-responsive">
+
+<table class="table table-striped table-bordered align-middle">
 
 <thead class="table-dark">
 <tr>
@@ -23,11 +25,10 @@
 @foreach($fazendas as $fazenda)
 
 <tr>
+
 <td>{{ $fazenda->nome }}</td>
 
-<td>
-{{ $fazenda->gados->count() }}
-</td>
+<td>{{ $fazenda->gados->count() }}</td>
 
 </tr>
 
@@ -37,6 +38,7 @@
 
 </table>
 
+</div>
 </div>
 </div>
 

@@ -2,23 +2,29 @@
 
 @section('content')
 
-<h2>Editar Gado</h2>
+<div class="row justify-content-center">
+
+<div class="col-12 col-lg-6">
+
+<h2 class="mb-3">Editar Gado</h2>
 
 @if ($errors->any())
 
 <div class="alert alert-danger">
-<ul>
+
+<ul class="mb-0">
 
 @foreach ($errors->all() as $erro)
 <li>{{ $erro }}</li>
 @endforeach
 
 </ul>
+
 </div>
 
 @endif
 
-<div class="card">
+<div class="card shadow-sm">
 <div class="card-body">
 
 <form action="{{ route('gados.update',$gado->id) }}" method="POST">
@@ -46,7 +52,8 @@ value="{{ $gado->peso }}" class="form-control">
 
 <div class="mb-3">
 <label class="form-label">Nascimento</label>
-<input type="date" name="nascimento"
+<input type="date"
+name="nascimento"
 value="{{ $gado->nascimento->format('Y-m-d') }}"
 class="form-control">
 </div>
@@ -72,6 +79,8 @@ class="form-control">
 
 </div>
 
+<div class="d-flex flex-column flex-md-row gap-2">
+
 <button class="btn btn-primary">
 Atualizar
 </button>
@@ -80,7 +89,12 @@ Atualizar
 Voltar
 </a>
 
+</div>
+
 </form>
+
+</div>
+</div>
 
 </div>
 </div>

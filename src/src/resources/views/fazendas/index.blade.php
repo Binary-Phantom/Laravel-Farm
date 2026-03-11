@@ -1,16 +1,15 @@
-<!-- Página inicial menu fazenda !-->
-
-
 @extends('app.app')
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
-<h2>Fazendas</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+
+<h2 class="mb-0">Fazendas</h2>
 
 <a href="{{ route('fazendas.create') }}" class="btn btn-success">
 Nova Fazenda
 </a>
+
 </div>
 
 @if(session('success'))
@@ -19,12 +18,16 @@ Nova Fazenda
 </div>
 @endif
 
-<div class="card">
+
+<div class="card shadow-sm">
 <div class="card-body">
 
-<table class="table table-striped table-bordered">
+<div class="table-responsive">
+
+<table class="table table-striped table-bordered align-middle">
 
 <thead class="table-dark">
+
 <tr>
 <th>Nome</th>
 <th>Hectares</th>
@@ -32,6 +35,7 @@ Nova Fazenda
 <th>Veterinários</th>
 <th width="180">Ações</th>
 </tr>
+
 </thead>
 
 <tbody>
@@ -52,14 +56,15 @@ Nova Fazenda
 
 <td>
 
+<div class="d-flex flex-column flex-md-row gap-2">
+
 <a href="{{ route('fazendas.edit',$fazenda->id) }}"
 class="btn btn-primary btn-sm">
 Editar
 </a>
 
 <form action="{{ route('fazendas.destroy',$fazenda->id) }}"
-method="POST"
-style="display:inline">
+method="POST">
 
 @csrf
 @method('DELETE')
@@ -70,6 +75,8 @@ Excluir
 
 </form>
 
+</div>
+
 </td>
 
 </tr>
@@ -79,6 +86,8 @@ Excluir
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 </div>

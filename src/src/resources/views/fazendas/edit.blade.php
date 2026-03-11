@@ -2,9 +2,13 @@
 
 @section('content')
 
-<h2>Editar Fazenda</h2>
+<div class="row justify-content-center">
 
-<div class="card">
+<div class="col-12 col-lg-6">
+
+<h2 class="mb-3">Editar Fazenda</h2>
+
+<div class="card shadow-sm">
 <div class="card-body">
 
 <form action="{{ route('fazendas.update',$fazenda->id) }}" method="POST">
@@ -13,13 +17,16 @@
 @method('PUT')
 
 <div class="mb-3">
+
 <label class="form-label">Nome da Fazenda</label>
 
 <input type="text"
 name="nome"
 value="{{ $fazenda->nome }}"
 class="form-control">
+
 </div>
+
 
 <div class="mb-3">
 
@@ -33,6 +40,7 @@ class="form-control">
 
 </div>
 
+
 <div class="mb-3">
 
 <label class="form-label">Responsável</label>
@@ -44,17 +52,26 @@ class="form-control">
 
 </div>
 
+
 <div class="mb-3">
 
 <label class="form-label">Veterinários</label>
 
-<br>
+<div class="mb-2">
 
-<a href="{{ route('veterinarios.create') }}" class="btn btn-sm btn-success mb-2">
+<a href="{{ route('veterinarios.create') }}"
+class="btn btn-sm btn-success">
+
 + Novo Veterinário
+
 </a>
 
-<select name="veterinarios[]" class="form-select" multiple size="5">
+</div>
+
+<select name="veterinarios[]"
+class="form-select"
+multiple
+size="5">
 
 @foreach($veterinarios as $vet)
 
@@ -71,15 +88,24 @@ class="form-control">
 
 </div>
 
+
+<div class="d-flex flex-column flex-md-row gap-2">
+
 <button class="btn btn-primary">
 Atualizar
 </button>
 
-<a href="{{ route('fazendas.index') }}" class="btn btn-secondary">
+<a href="{{ route('fazendas.index') }}"
+class="btn btn-secondary">
 Voltar
 </a>
 
+</div>
+
 </form>
+
+</div>
+</div>
 
 </div>
 </div>

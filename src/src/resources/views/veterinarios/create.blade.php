@@ -1,24 +1,66 @@
 @extends('app.app')
+
 @section('content')
 
-<div class="container mt-5">
-    <h1 class="mb-4">Novo Veterinário</h1>
+<div class="row justify-content-center">
 
-    <form action="{{ route('veterinarios.store') }}" method="POST">
-        @csrf
+<div class="col-12 col-lg-6">
 
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome do veterinário" required>
-        </div>
+<h2 class="mb-3">Novo Veterinário</h2>
 
-        <div class="mb-3">
-            <label for="crmv" class="form-label">CRMV:</label>
-            <input type="text" name="crmv" id="crmv" class="form-control" placeholder="Digite o CRMV" maxlength="5" required>
-        </div>
+<div class="card shadow-sm">
+<div class="card-body">
 
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
+<form action="{{ route('veterinarios.store') }}" method="POST">
+
+@csrf
+
+<div class="mb-3">
+
+<label class="form-label">Nome</label>
+
+<input type="text"
+name="nome"
+class="form-control"
+placeholder="Digite o nome do veterinário"
+required>
+
+</div>
+
+
+<div class="mb-3">
+
+<label class="form-label">CRMV</label>
+
+<input type="text"
+name="crmv"
+class="form-control"
+placeholder="Digite o CRMV"
+maxlength="5"
+required>
+
+</div>
+
+
+<div class="d-flex flex-column flex-md-row gap-2">
+
+<button class="btn btn-success">
+Salvar
+</button>
+
+<a href="{{ route('veterinarios.index') }}"
+class="btn btn-secondary">
+Cancelar
+</a>
+
+</div>
+
+</form>
+
+</div>
+</div>
+
+</div>
 </div>
 
 @endsection

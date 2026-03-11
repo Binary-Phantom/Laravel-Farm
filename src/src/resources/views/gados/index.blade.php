@@ -1,32 +1,35 @@
-<!-- Página inicial menu gado !-->
-
-
 @extends('app.app')
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Gados</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
 
-    <div>
-        <a href="{{ route('gados.create') }}" class="btn btn-success">
-            Novo Gado
-        </a>
+<h2 class="mb-0">Gados</h2>
 
-        <a href="{{ route('gados.abate') }}" class="btn btn-danger">
-            Elegíveis para Abate
-        </a>
-    </div>
+<div class="d-flex flex-column flex-md-row gap-2">
+
+<a href="{{ route('gados.create') }}" class="btn btn-success">
+Novo Gado
+</a>
+
+<a href="{{ route('gados.abate') }}" class="btn btn-danger">
+Elegíveis para Abate
+</a>
+
+</div>
+
 </div>
 
 @if(session('success'))
 <div class="alert alert-success">
-    {{ session('success') }}
+{{ session('success') }}
 </div>
 @endif
 
-<div class="card">
+<div class="card shadow-sm">
 <div class="card-body">
+
+<div class="table-responsive">
 
 <table class="table table-striped table-bordered align-middle">
 
@@ -41,7 +44,7 @@
 <th>Peso (@)</th>
 <th>Nascimento</th>
 <th>Status</th>
-<th width="200">Ações</th>
+<th width="220">Ações</th>
 </tr>
 
 </thead>
@@ -78,14 +81,15 @@
 
 <td>
 
+<div class="d-flex flex-column flex-md-row gap-2">
+
 <a href="{{ route('gados.edit',$gado->id) }}"
 class="btn btn-primary btn-sm">
 Editar
 </a>
 
 <form action="{{ route('gados.destroy',$gado->id) }}"
-method="POST"
-style="display:inline">
+method="POST">
 
 @csrf
 @method('DELETE')
@@ -99,8 +103,7 @@ Excluir
 @if($gado->estaVivo() && $gado->podeSerAbatido())
 
 <form action="{{ route('gados.abater',$gado->id) }}"
-method="POST"
-style="display:inline">
+method="POST">
 
 @csrf
 
@@ -112,6 +115,8 @@ Abater
 
 @endif
 
+</div>
+
 </td>
 
 </tr>
@@ -121,6 +126,8 @@ Abater
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 </div>

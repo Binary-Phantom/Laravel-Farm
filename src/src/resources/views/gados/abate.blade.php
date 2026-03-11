@@ -2,11 +2,15 @@
 
 @section('content')
 
-<h2>Animais para Abate</h2>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
 
-<a href="{{ route('gados.index') }}" class="btn btn-secondary mb-3">
+<h2 class="mb-0">Animais para Abate</h2>
+
+<a href="{{ route('gados.index') }}" class="btn btn-secondary">
 Voltar
 </a>
+
+</div>
 
 @if(session('success'))
 
@@ -16,10 +20,12 @@ Voltar
 
 @endif
 
-<div class="card">
+<div class="card shadow-sm">
 <div class="card-body">
 
-<table class="table table-bordered table-striped">
+<div class="table-responsive">
+
+<table class="table table-bordered table-striped align-middle">
 
 <thead class="table-dark">
 
@@ -84,6 +90,8 @@ Nenhum animal disponível para abate
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 </div>
