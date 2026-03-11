@@ -35,6 +35,8 @@ class VeterinarioController extends Controller
         $request->validate([
         'nome' => 'required|string|max:255',
         'crmv' => 'required|string|max:20|unique:veterinarios,crmv' //substitui o id padrão pelo o crmv
+        ],[
+        'crmv.unique' => 'CRMV já cadastrado'
         ]);
 
         Veterinario::create($request->all());
@@ -68,10 +70,15 @@ class VeterinarioController extends Controller
     $request->validate([
         'nome' => 'required|string|max:255',
         'crmv' => 'required|string|max:20|unique:veterinarios,crmv,' . $veterinario->crmv . ',crmv',
-    ]);
+    
+        ], [
+
+        'crmv.unique' => 'CRMV já cadastrado'
+        
+        ]);
 
     $veterinario->nome = $request->nome;
-    $veterinario->crmv = $request->crmv; // se quiser permitir alteração de crmv
+    $veterinario->crmv = $request->crmv; // permite alteração de crmv
     $veterinario->save();
 
     return redirect()->route('veterinarios.index')->with('success', 'Veterinário atualizado!');
