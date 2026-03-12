@@ -36,7 +36,7 @@ git clone https://github.com/Binary-Phantom/Laravel-Farm.git
 Navigate into the project folder:
 
 ```bash
-cd your-repository
+cd laravel-farm/src/src
 ```
 
 ---
@@ -83,18 +83,19 @@ Run the following command to build and start the containers:
 docker compose up -d --build
 ```
 
-This will start the necessary services such as:
+This will start all the necessary services and dependencies such as:
 
 * PHP
 * Laravel
 * Web server
 * Database
+* Composer
 
 ---
 
-# 📦 4. Install Laravel dependencies
+# 📦 4. Manually Install Laravel dependencies (Optional)
 
-Install the project dependencies using Composer inside the container:
+If something fails you stiil able to download the project dependencies using Composer inside the container:
 
 ```bash
 docker compose exec app composer install
@@ -102,9 +103,9 @@ docker compose exec app composer install
 
 ---
 
-# 🔑 5. Generate application key
+# 🔑 5. Manually Generate application key (Optional)
 
-Laravel requires an application key for security purposes.
+By default the script wiil install the application key for security purposes automatically, but in case of something going wrong, check the .env file "APP_KEY" field to see if it was intalled. If it doesn't then:
 
 Run:
 
@@ -114,19 +115,14 @@ docker compose exec app php artisan key:generate
 
 ---
 
-# 🗄️ 6. Run database migrations
+# 🗄️ 6. Manually Run database migrations (Optional)
 
-Create the database tables by running:
+By default, the script will Create the database tables automatically but, in case of something goind wrong, you can do it manually by running:
 
 ```bash
 docker compose exec app php artisan migrate
 ```
 
-If the project contains seed data, you can populate the database with:
-
-```bash
-docker compose exec app php artisan db:seed
-```
 
 ---
 
@@ -168,24 +164,26 @@ The system should now be running.
 
 This project was developed for **personal purposes**.
 
+---
+---
 
-# 🚜 Sistema de Gestão de Fazendas
+# 🚜 Sistema de Gestão de Fazendas - "Laravel-Farm"
 
 Sistema web desenvolvido com **Laravel, Bootstrap, Docker e MySQL/PostgreSQL** para gerenciamento de fazendas, gado e veterinários.
 
-O sistema permite controlar informações de produção de leite, consumo de ração e dados dos animais, auxiliando na gestão das propriedades rurais.
+O sistema permite monitorar **produção de leite, consumo de ração e dados dos animais**, auxiliando na gestão da fazenda e na tomada de decisões.
 
 ---
 
-# 📋 Pré-requisitos
+# 📋 Requisitos
 
-Antes de rodar o projeto localmente, é necessário ter instalado:
+Antes de executar o projeto localmente, certifique-se de que as seguintes ferramentas estão instaladas:
 
 * 🐳 **Docker**
 * 🐳 **Docker Compose**
 * 🌐 **Git**
 
-Verifique se estão instalados executando:
+Você pode verificar se estão instaladas executando:
 
 ```bash
 docker --version
@@ -203,68 +201,69 @@ Clone o projeto do GitHub:
 git clone https://github.com/Binary-Phantom/Laravel-Farm.git
 ```
 
-Entre na pasta do projeto:
+Acesse a pasta do projeto:
 
 ```bash
-cd seu-repositorio
+cd laravel-farm/src/src
 ```
 
 ---
 
 # ⚙️ 2. Configurar variáveis de ambiente
 
-Copie o arquivo de exemplo `.env.example` para `.env`.
+Copie o arquivo `.env.example` para criar o arquivo de configuração `.env`:
 
 ```bash
 cp .env.example .env
 ```
 
-Edite o arquivo `.env` e configure o banco de dados.
+Edite o arquivo `.env` e configure a conexão com o banco de dados.
 
-### Exemplo usando MySQL
+### Exemplo utilizando MySQL
 
 ```
 DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
-DB_DATABASE=fazenda
+DB_DATABASE=farm
 DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
-### Exemplo usando PostgreSQL
+### Exemplo utilizando PostgreSQL
 
 ```
 DB_CONNECTION=pgsql
 DB_HOST=db
 DB_PORT=5432
-DB_DATABASE=fazenda
+DB_DATABASE=farm
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
 ```
 
 ---
 
-# 🐳 3. Subir os containers Docker
+# 🐳 3. Iniciar os containers Docker
 
-Execute o comando abaixo para construir e iniciar os containers:
+Execute o seguinte comando para **construir e iniciar os containers**:
 
 ```bash
 docker compose up -d --build
 ```
 
-Isso iniciará os serviços necessários para o projeto, como:
+Isso iniciará todos os serviços necessários para o sistema funcionar, como:
 
 * PHP
 * Laravel
-* Servidor web
-* Banco de dados
+* Servidor Web
+* Banco de Dados
+* Composer
 
 ---
 
-# 📦 4. Instalar dependências do Laravel
+# 📦 4. Instalar dependências do Laravel manualmente (Opcional)
 
-Instale as dependências do projeto utilizando o Composer dentro do container:
+Caso ocorra algum erro durante a inicialização, você pode instalar as dependências manualmente utilizando o Composer dentro do container:
 
 ```bash
 docker compose exec app composer install
@@ -272,11 +271,13 @@ docker compose exec app composer install
 
 ---
 
-# 🔑 5. Gerar chave da aplicação
+# 🔑 5. Gerar a chave da aplicação manualmente (Opcional)
 
-Laravel precisa de uma chave de segurança para funcionar corretamente.
+Por padrão, o script gera automaticamente a **chave da aplicação** por motivos de segurança.
 
-Execute:
+Caso algo dê errado, verifique no arquivo `.env` se o campo `APP_KEY` foi gerado.
+
+Se não tiver sido, execute:
 
 ```bash
 docker compose exec app php artisan key:generate
@@ -284,32 +285,27 @@ docker compose exec app php artisan key:generate
 
 ---
 
-# 🗄️ 6. Rodar as migrations
+# 🗄️ 6. Executar as migrations do banco de dados (Opcional)
 
-Crie as tabelas do banco de dados:
+Normalmente o script cria automaticamente as tabelas do banco de dados.
+
+Caso isso não aconteça, você pode executar manualmente:
 
 ```bash
 docker compose exec app php artisan migrate
 ```
 
-Se o projeto possuir dados iniciais, execute também:
-
-```bash
-docker compose exec app php artisan db:seed
-```
-
 ---
 
-# 🚀 7. Rodar o projeto
+# 🚀 7. Executar o projeto
 
-Após concluir as etapas anteriores, abra no navegador:
+Após concluir os passos acima, abra a aplicação no navegador:
 
 ```
 http://localhost:8000
 ```
 
-O sistema estará pronto para uso.
-
+O sistema deverá estar funcionando.
 
 ---
 
@@ -326,15 +322,16 @@ O sistema estará pronto para uso.
 
 # 📊 Funcionalidades
 
-* Cadastro de **Fazendas**
-* Cadastro de **Veterinários**
-* Cadastro de **Gado**
-* Controle de **produção de leite**
-* Controle de **consumo de ração**
+* **Cadastro de fazendas**
+* **Cadastro de veterinários**
+* **Gerenciamento de gado**
+* **Monitoramento da produção de leite**
+* **Controle de consumo de ração**
 * **Relatórios e dashboards**
 
 ---
 
 # 📄 Licença
 
-Este projeto foi desenvolvido para fins pessoais.
+Este projeto foi desenvolvido para **fins pessoais e educacionais**.
+
