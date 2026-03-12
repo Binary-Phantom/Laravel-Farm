@@ -1,24 +1,30 @@
+version: "3.8"
 
 services:
-  app:
+#pra subir ambos os containers
+  laravel:
     build: .
-    container_name: laravel-farm
+    container_name: laravel
     ports:
-      - "8000:8000"
+      - "8000:80"
     volumes:
       - .:/var/www
     depends_on:
-      - db
+      - faz_db
 
-  db:
+  faz_db:
     image: mysql:8
-    container_name: fazenda_db
+    container_name: faz_db
     restart: always
     environment:
       MYSQL_DATABASE: fazenda
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: laravel
-      MYSQL_PASSWORD: secret
+      MYSQL_PASSWORD: laravel
     ports:
       - "3306:3306"
-  
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:

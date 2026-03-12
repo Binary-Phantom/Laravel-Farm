@@ -1,3 +1,6 @@
+#dockerfile para localhost
+
+
 FROM php:8.4-apache
 
 RUN apt-get update && apt-get install -y \
@@ -5,16 +8,16 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     curl \
-    libpq-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
+    default-mysql-client \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
     pdo \
-    pdo_pgsql \
+    pdo_mysql \
     mbstring \
     exif \
     pcntl \
@@ -33,7 +36,7 @@ RUN chmod -R 775 storage bootstrap/cache \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install
 
 RUN sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
