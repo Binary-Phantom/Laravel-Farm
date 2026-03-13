@@ -98,7 +98,7 @@ This will start all the necessary services and dependencies such as:
 If something fails you stiil able to download the project dependencies using Composer inside the container:
 
 ```bash
-docker compose exec app composer install
+docker compose exec laravel composer install
 ```
 
 ---
@@ -110,7 +110,7 @@ By default the script wiil install the application key for security purposes aut
 Run:
 
 ```bash
-docker compose exec app php artisan key:generate
+docker compose exec laravel php artisan key:generate
 ```
 
 ---
@@ -120,7 +120,7 @@ docker compose exec app php artisan key:generate
 By default, the script will Create the database tables automatically but, in case of something goind wrong, you can do it manually by running:
 
 ```bash
-docker compose exec app php artisan migrate
+docker compose exec laravel php artisan migrate
 ```
 
 
@@ -266,7 +266,7 @@ Isso iniciará todos os serviços necessários para o sistema funcionar, como:
 Caso ocorra algum erro durante a inicialização, você pode instalar as dependências manualmente utilizando o Composer dentro do container:
 
 ```bash
-docker compose exec app composer install
+docker compose exec laravel composer install
 ```
 
 ---
@@ -280,7 +280,7 @@ Caso algo dê errado, verifique no arquivo `.env` se o campo `APP_KEY` foi gerad
 Se não tiver sido, execute:
 
 ```bash
-docker compose exec app php artisan key:generate
+docker compose exec laravel php artisan key:generate
 ```
 
 ---
@@ -292,7 +292,7 @@ Normalmente o script cria automaticamente as tabelas do banco de dados.
 Caso isso não aconteça, você pode executar manualmente:
 
 ```bash
-docker compose exec app php artisan migrate
+docker compose exec laravel php artisan migrate
 ```
 
 ---
