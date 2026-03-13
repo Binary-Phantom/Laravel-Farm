@@ -8,7 +8,7 @@ if [ ! -d "vendor" ]; then
 fi
 
 if ! php artisan key:show > /dev/null 2>&1; then
-    php artisan key:generate
+    php artisan key:generate --force
 fi
 
 php artisan config:clear
