@@ -29,17 +29,23 @@ class RelatorioController extends Controller
     // animais abatidos por período
 
     public function abatePeriodo(Request $request)
-    {
-        $inicio = $request->inicio;
-        $fim = $request->fim;
+{
+    $gados = collect();
+    $inicio = $request->inicio;
+    $fim = $request->fim;
 
+    if ($inicio && $fim) {
         $gados = Gado::with('fazenda')
             ->whereNotNull('abatido_em')
-            ->whereBetween('abatido_em', [$inicio, $fim])
+            ->whereBetween('abatido_em', [
+                Carbon::parse($inicio)->startOfDay(),
+                Carbon::parse($fim)->endOfDay()
+            ])
             ->get();
-
-        return view('relatorios.abate', compact('gados', 'inicio', 'fim'));
     }
+
+    return view('relatorios.abate', compact('gados', 'inicio', 'fim'));
+}
 
     // animais vivos por fazenda
     public function animaisPorFazenda()
