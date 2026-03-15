@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('gados', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('codigo')->unique();
+            $table->bigInteger('codigo');
             $table->decimal('leite_semana', 4, 1)->default(0);
             $table->bigInteger('racao_semana')->default(0);
             $table->float('peso', 5, 1)->default(0);
