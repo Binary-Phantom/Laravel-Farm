@@ -93,6 +93,13 @@ This will start all the necessary services and dependencies such as:
 
 ---
 
+EXTRA: If the database container rerports something like error (1) or 500, you can try this one:
+
+docker compose down -v
+docker volume prune
+
+---
+
 # 📦 4. Manually Install Laravel dependencies (Optional)
 
 If something fails you stiil able to download the project dependencies using Composer inside the container:
@@ -258,6 +265,13 @@ Isso iniciará todos os serviços necessários para o sistema funcionar, como:
 * Servidor Web
 * Banco de Dados
 * Composer
+
+---
+
+EXTRA: Se o container do bd retornar algo como erro (1) ou 500, tente os comandos a seguir:
+
+docker compose down -v
+docker volume prune
 
 ---
 
